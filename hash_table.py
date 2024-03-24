@@ -43,8 +43,7 @@ class HashTable:
         self.array = [DoublyLinkedList() for _ in range(size)]
     
     def hash_function(self, key):
-        # Multiplication method
-        A = 0.6180339887  # golden ratio
+        A = 0.6180339887  
         return int(self.size * ((key * A) % 1))
     
     def insert(self, key, value):
@@ -56,7 +55,7 @@ class HashTable:
                 return
         list_at_index.append(key, value)
         self.count += 1
-        if self.count > self.size * 2:  # If table is full
+        if self.count > self.size * 2:  
             self._resize(2 * self.size)
     
     def get(self, key):
@@ -74,7 +73,7 @@ class HashTable:
             if node.key == key:
                 list_at_index.remove(node)
                 self.count -= 1
-                if self.count < self.size // 4:  # If table is 1/4 empty
+                if self.count < self.size // 4: 
                     self._resize(self.size // 2)
                 return
     
@@ -82,7 +81,7 @@ class HashTable:
         old_array = self.array
         self.size = new_size
         self.array = [DoublyLinkedList() for _ in range(new_size)]
-        self.count = 0  # Reset count as we will reinsert elements
+        self.count = 0  
         for linked_list in old_array:
             for node in linked_list:
                 self.insert(node.key, node.value)
